@@ -15,22 +15,22 @@ import com.example.workshopmongo.services.exception.ObjectNotFoundException;
 public class PostService {
 
 	@Autowired
-	private PostRepository repo;
+	private PostRepository postRepository;
 
 	public Post findById(String id) {
-		Optional<Post> obj = repo.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+		Optional<Post> optionalPost = postRepository.findById(id);
+		return optionalPost.orElseThrow(() -> new ObjectNotFoundException("object not found"));
 	}
 
 	public List<Post> findByTitle(String text) {
-		return repo.searchTitle(text);
-//		return repo.findByTitleContaining(text);
-//		return repo.findByTitleContainingIgnoreCase(text);
+//		return postRepository.findByTitleContaining(text);
+//		return postRepository.findByTitleContainingIgnoreCase(text);
+		return postRepository.searchTitle(text);
 	}
 
 	public List<Post> fullSearch(String text, Date minDate, Date maxDate) {
 		maxDate = new Date(maxDate.getTime() + 24 * 60 * 60 * 1000);
-		return repo.fullSearch(text, minDate, maxDate);
+		return postRepository.fullSearch(text, minDate, maxDate);
 	}
 
 }

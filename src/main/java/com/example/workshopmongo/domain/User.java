@@ -28,7 +28,6 @@ public class User implements Serializable {
 	}
 
 	public User(String id, String name, String email) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
@@ -60,10 +59,6 @@ public class User implements Serializable {
 
 	public List<Post> getPosts() {
 		return posts;
-	}
-
-	public void setPosts(List<Post> posts) {
-		this.posts = posts;
 	}
 
 	@Override

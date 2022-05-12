@@ -30,13 +30,12 @@ public class Post implements Serializable {
 
 	}
 
-	public Post(String id, Date date, String title, String body, AuthorDTO author) {
-		super();
+	public Post(String id, Date date, String title, String body, AuthorDTO authorDTO) {
 		this.id = id;
 		this.date = date;
 		this.title = title;
 		this.body = body;
-		this.author = author;
+		this.author = authorDTO;
 	}
 
 	public String getId() {
@@ -81,10 +80,6 @@ public class Post implements Serializable {
 
 	public List<CommentDTO> getComments() {
 		return comments;
-	}
-
-	public void setComments(List<CommentDTO> comments) {
-		this.comments = comments;
 	}
 
 	@Override

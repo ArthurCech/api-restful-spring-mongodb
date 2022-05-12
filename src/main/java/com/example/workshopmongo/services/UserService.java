@@ -15,39 +15,39 @@ import com.example.workshopmongo.services.exception.ObjectNotFoundException;
 public class UserService {
 
 	@Autowired
-	private UserRepository repo;
+	private UserRepository userRepository;
 
 	public List<User> findAll() {
-		return repo.findAll();
+		return userRepository.findAll();
 	}
 
 	public User findById(String id) {
-		Optional<User> obj = repo.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+		Optional<User> optionalUser = userRepository.findById(id);
+		return optionalUser.orElseThrow(() -> new ObjectNotFoundException("object not found"));
 	}
 
 	public User insert(User obj) {
-		return repo.insert(obj);
+		return userRepository.insert(obj);
 	}
 
 	public void delete(String id) {
 		findById(id);
-		repo.deleteById(id);
+		userRepository.deleteById(id);
 	}
 
-	public User update(User obj) {
-		User newObj = findById(obj.getId());
-		updateData(newObj, obj);
-		return repo.save(newObj);
+	public User update(User user) {
+		User newUser = findById(user.getId());
+		updateData(newUser, user);
+		return userRepository.save(newUser);
 	}
 
-	private void updateData(User newObj, User obj) {
-		newObj.setName(obj.getName());
-		newObj.setEmail(obj.getEmail());
+	private void updateData(User newUser, User oldUser) {
+		newUser.setName(oldUser.getName());
+		newUser.setEmail(oldUser.getEmail());
 	}
 
-	public User fromDTO(UserDTO objDto) {
-		return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
+	public User fromDTO(UserDTO userDTO) {
+		return new User(userDTO.getId(), userDTO.getName(), userDTO.getEmail());
 	}
 
 }

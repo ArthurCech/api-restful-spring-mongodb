@@ -36,10 +36,6 @@ public class Instantiation implements CommandLineRunner {
 		User alex = new User(null, "Alex Green", "alex@gmail.com");
 		User bob = new User(null, "Bob Grey", "bob@gmail.com");
 
-		/*
-		 * Tenho que salvar os usuarios antes para gerar o ID. Temos que fazer isso
-		 * porque estamos utilizando AuthorID que depende do ID do user
-		 */
 		userRepository.saveAll(Arrays.asList(maria, alex, bob));
 
 		Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou viajar para São Paulo. Abraços!",

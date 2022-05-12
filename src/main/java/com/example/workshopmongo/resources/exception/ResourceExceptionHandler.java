@@ -13,11 +13,11 @@ import com.example.workshopmongo.services.exception.ObjectNotFoundException;
 public class ResourceExceptionHandler {
 
 	@ExceptionHandler(ObjectNotFoundException.class)
-	public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException e, HttpServletRequest request) {
+	public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException exception, HttpServletRequest request) {
 		HttpStatus status = HttpStatus.NOT_FOUND;
-		StandardError err = new StandardError(System.currentTimeMillis(), status.value(), "Não encontrado",
-				e.getMessage(), request.getRequestURI());
-		return ResponseEntity.status(status).body(err);
+		StandardError standardError = new StandardError(System.currentTimeMillis(), status.value(), "não encontrado",
+				exception.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(status).body(standardError);
 	}
 
 }
